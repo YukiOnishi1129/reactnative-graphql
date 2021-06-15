@@ -1,0 +1,3 @@
+FROM node:12.14-alpine
+
+EXPOSE 4000
