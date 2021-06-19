@@ -57,7 +57,39 @@ export const TodoResolvers: IResolvers = {
         createdAt: todo.createdAt,
       };
     },
-    allTodo(parent, args) {},
+
+    /**
+     * allTodo
+     * @param parent
+     * @param args
+     * @param param2
+     * @returns
+     */
+    async allTodo(
+      parent,
+      args,
+      { currentUser }: ResolverContextType
+    ): Promise<TodoGraphQLType[]> {
+      // 認証エラーチェック
+      if (!currentUser) throw new ApolloError("認証エラーです。", "401");
+
+      const data = await getTodoList(currentUser.id);
+
+      if (!data || data.length === 0) return [];
+
+      const todoList: TodoGraphQLType[] = data.map((todo) => {
+        return {
+          id: todo.id,
+          title: todo.title,
+          content: todo.content,
+          doneFlg: todo.doneFlg,
+          userId: todo.userId,
+          createdAt: todo.createdAt,
+        };
+      });
+
+      return todoList;
+    },
   },
 
   /**
