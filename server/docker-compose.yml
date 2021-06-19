@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     volumes: # ローカルとコンテナのパスをマウント
-      - ./server:/app
+      - ./app:/app
       - /etc/localtime:/etc/localtime:ro # タイムゾーンを日本時刻に設定
     working_dir: /app
     environment:
