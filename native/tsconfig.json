@@ -1,6 +1,23 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "@Component/*": ["./src/components/*"],
+      "@Screen/*": ["./src/screens/*"],
+      "@Route/*": ["./src/navigation/*"],
+      "@Type/*": ["./src/types/*"],
+      "@Context/*": ["./src/contexts/*"],
+      "@Storage/*": ["./src/storages/*"],
+      "@Constants/*": ["./src/constants/*"],
+      "@GraphQL/*": ["./src/graphql/*"]
+    }
   }
 }
