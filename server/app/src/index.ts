@@ -4,8 +4,10 @@
 require("module-alias/register");
 import express from "express";
 import "reflect-metadata";
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, PubSub } from "apollo-server-express";
 import dotenv from "dotenv";
+/* schema */
+import schema from "./graphql/schemasMap";
 
 dotenv.config();
 
@@ -16,9 +18,20 @@ function start() {
   const app = express();
   const PORT = 4000;
 
-  app.get("/", (req, res) => {
-    res.send("Hello, World!");
+  const pubsub = new PubSub();
+
+  //   app.get("/", (req, res) => {
+  //     res.send("Hello, World!");
+  //   });
+
+  const server = new ApolloServer({
+    schema,
+    context: () => {
+      return { pubsub };
+    },
   });
+
+  server.applyMiddleware({ app });
 
   app.listen(PORT, () => {
     console.log(

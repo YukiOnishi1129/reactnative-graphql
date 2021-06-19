@@ -4,4 +4,12 @@
  */
 import { PubSub } from "apollo-server-express";
 /* graphql */
-// import {} from "@GraphQL/"
+import { User as UserGraphQLType } from "@GraphQL/types";
+
+/**
+ * ResolverContextType
+ */
+export interface ResolverContextType {
+  currentUser: UserGraphQLType;
+  pubsub: PubSub;
+}

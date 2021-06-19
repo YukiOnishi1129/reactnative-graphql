@@ -58,6 +58,7 @@
     "graphql": "^15.5.0",
     "graphql-import-node": "^0.0.4",
     "graphql-playground-middleware-express": "^1.7.22",
+    "graphql-tools": "^7.0.5",
     "http": "^0.0.1-security",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
