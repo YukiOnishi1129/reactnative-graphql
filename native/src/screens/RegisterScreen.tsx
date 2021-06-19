@@ -1,5 +1,5 @@
 /**
- * LoginScreen
+ * RegisterScreen
  * @package screens
  */
 import React from 'react';
@@ -11,16 +11,16 @@ import { getUserStorage } from '@Storage/Storage';
 /* contexts */
 import { useAppDispatch, login } from '@Context/AppContext';
 /* components */
-import { LoginTemplate } from '@Component/templates/LoginScreen';
+import { RegisterTemplate } from '@Component/templates/RegisterScreen';
 /* hooks */
 import { useSignInMutation } from '@Hook/useGraphQL';
 /* styles */
 import { Theme } from '@Style/Theme';
 
 /**
- * LoginScreen
+ * RegisterScreen
  * @returns
  */
-export const LoginScreen: React.VFC = () => {
-  return <LoginTemplate />;
+export const RegisterScreen: React.VFC = () => {
+  return <RegisterTemplate />;
 };

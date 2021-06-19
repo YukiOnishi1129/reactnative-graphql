@@ -1,6 +1,6 @@
 /**
- * LoginScreen
- * @package screens
+ * RegisterTemplate
+ * @package components
  */
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
@@ -11,16 +11,23 @@ import { getUserStorage } from '@Storage/Storage';
 /* contexts */
 import { useAppDispatch, login } from '@Context/AppContext';
 /* components */
-import { LoginTemplate } from '@Component/templates/LoginScreen';
+import { BaseScreen } from '@Component/layouts/BaseScreen';
 /* hooks */
 import { useSignInMutation } from '@Hook/useGraphQL';
 /* styles */
 import { Theme } from '@Style/Theme';
 
 /**
- * LoginScreen
+ * RegisterTemplate
  * @returns
  */
-export const LoginScreen: React.VFC = () => {
-  return <LoginTemplate />;
+export const RegisterTemplate: React.VFC = () => {
+  /* graphql query */
+  /* graphql mutation */
+
+  return (
+    <BaseScreen>
+      <Text>RegisterTemplate</Text>
+    </BaseScreen>
+  );
 };
