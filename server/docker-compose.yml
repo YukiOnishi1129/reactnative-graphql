@@ -12,7 +12,7 @@ services:
     working_dir: /app
     environment:
       TZ: Asia/Tokyo # タイムゾーンを日本時刻に設定
-    # command: sh -c 'yarn && yarn start'
+    command: sh -c 'yarn && yarn start'
     ports:
       - 4000:4000
     security_opt:
