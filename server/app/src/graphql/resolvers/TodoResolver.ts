@@ -129,15 +129,66 @@ export const TodoResolvers: IResolvers = {
       };
 
       // サブスクリプション起動
+      //   pubsub.publish("NEW_TODO", {
+      //     newTodo: newTodo,
+      //   });
 
       return {
         todo: newTodo,
       };
     },
-    updateTodo(parent, args) {},
-    doneTodo(parent, args) {},
-    activeTodo(parent, args) {},
-    deleteTodo(parent, args) {},
+
+    /**
+     * updateTodo
+     * @param parent
+     * @param args
+     * @param param2
+     */
+    async updateTodo(
+      parent,
+      args,
+      { currentUser, pubsub }: ResolverContextType
+    ) {
+      // 認証エラーチェック
+      if (!currentUser) throw new ApolloError("認証エラーです。", "401");
+
+      if (
+        !args?.input?.id ||
+        !args?.input?.title ||
+        (!args?.input?.content && args?.input?.content !== "")
+      )
+        throw new ApolloError("リクエストパラメータエラーです。", "400");
+
+      const todo = await updateTodo(
+        args.input.id,
+        args.input.title,
+        args.input.content
+      );
+
+      if (!todo)
+        throw new ApolloError("リクエストパラメータエラーです。", "400");
+
+      const updatedTodo: TodoGraphQLType = {
+        id: todo.id,
+        title: todo.title,
+        content: todo.content,
+        doneFlg: todo.doneFlg,
+        userId: todo.userId,
+        createdAt: todo.createdAt,
+      };
+
+      // サブスクリプション起動
+      //   pubsub.publish("UPDATED_TODO", {
+      //     updatedTodo: updatedTodo,
+      //   });
+
+      return {
+        todo: updatedTodo,
+      };
+    },
+    doneTodo(parent, args, { currentUser, pubsub }: ResolverContextType) {},
+    activeTodo(parent, args, { currentUser, pubsub }: ResolverContextType) {},
+    deleteTodo(parent, args, { currentUser, pubsub }: ResolverContextType) {},
   },
 
   Subscription: {
