@@ -5,24 +5,21 @@ require("module-alias/register");
 import express from "express";
 import "reflect-metadata";
 import { ApolloServer, PubSub } from "apollo-server-express";
-import dotenv from "dotenv";
+import { createConnection } from "typeorm";
 /* schema */
 import schema from "./graphql/schemasMap";
-
-dotenv.config();
 
 /**
  * start
  */
-function start() {
+async function start() {
   const app = express();
   const PORT = 4000;
 
   const pubsub = new PubSub();
 
-  //   app.get("/", (req, res) => {
-  //     res.send("Hello, World!");
-  //   });
+  // DBのコネクションプール作成
+  await createConnection();
 
   const server = new ApolloServer({
     schema,
