@@ -1,21 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
+/**
+ * App.tsx
+ */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ApolloClient, InMemoryCache, ApolloProvider, split, createHttpLink } from '@apollo/client';
+/* routes */
+import { AppNavigator } from '@Route/index';
+/* types */
+import { Query } from '@Type/schemas';
 
-export default function App() {
+/**
+ * App
+ * @returns
+ */
+const App = (): JSX.Element => {
+  const client = new ApolloClient({
+    uri: 'http://localhost:4000/graphql',
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            allTodo: {
+              merge(existing = [], incoming: Query['allTodo']) {
+                if (existing.length === 0 && incoming.length === 0) return [];
+
+                return incoming;
+              },
+            },
+          },
+        },
+      },
+    }),
+  });
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ApolloProvider client={client}>
+      <AppNavigator />
+    </ApolloProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

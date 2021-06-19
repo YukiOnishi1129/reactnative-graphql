@@ -1,9 +1,8 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: [
-      ['babel-preset-expo'],
-      ['react-native-reanimated/plugin'],
+    presets: ['babel-preset-expo'],
+    plugins: [
       [
         'module-resolver',
         {
@@ -13,9 +12,12 @@ module.exports = function (api) {
             '@Screen': './src/screens',
             '@Route': './src/routes',
             '@Type': './src/types',
+            '@Hook': './src/hooks',
+            '@Logic': './src/logics',
             '@Context': './src/contexts',
             '@Storage': './src/storages',
-            '@Constants': './src/constants',
+            '@Constant': './src/constants',
+            '@Style': './src/styles',
             '@GraphQL': './src/graphql',
           },
         },
