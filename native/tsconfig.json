@@ -10,6 +10,7 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
+      "@Provider/*": ["./src/providers/*"],
       "@Component/*": ["./src/components/*"],
       "@Screen/*": ["./src/screens/*"],
       "@Route/*": ["./src/routes/*"],

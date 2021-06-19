@@ -22,8 +22,9 @@ import { Theme } from '@Style/Theme';
  * @returns
  */
 export const LoginTemplate: React.VFC = () => {
-  /* graphql query */
+  /* contexts */
   /* graphql mutation */
+  const [loginMutation, { loading: mutationLoading, error: mutationError }] = useSignInMutation();
 
   return (
     <BaseScreen>
