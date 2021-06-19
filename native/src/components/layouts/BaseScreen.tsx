@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     marginLeft: 'auto',
     width: '80%',
-    height: 40,
+    height: '100%',
   },
 });

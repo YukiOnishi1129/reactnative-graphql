@@ -91,5 +91,5 @@ export const AppContextProvider: React.FC<Props> = ({ children }: Props) => {
   );
 };
 
-export const useAppState = () => React.useContext(AppStateContext);
-export const useAppDispatch = () => React.useContext(AppDispatchContext);
+export const useAppState = (): AppStateType => React.useContext(AppStateContext);
+export const useAppDispatch = (): AppDispatchType => React.useContext(AppDispatchContext);

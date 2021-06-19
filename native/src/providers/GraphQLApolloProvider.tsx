@@ -29,7 +29,7 @@ export const GraphQLApolloProvider: React.VFC<Props> = ({ children }: Props) => 
   /* storage */
   const repo = getUserStorage();
   /* contexts */
-  const state = useAppState();
+  const state = useAppState(); // eslint-disable-line
 
   const httpLink = createHttpLink({
     uri: 'http://localhost:4000/graphql',
@@ -37,9 +37,12 @@ export const GraphQLApolloProvider: React.VFC<Props> = ({ children }: Props) => 
 
   const authLink = setContext(async (_, { headers }) => {
     const current = await repo.load();
+    console.log(current);
     return {
-      ...headers,
-      authorization: current?.token ? current.token : '',
+      headers: {
+        ...headers,
+        authorization: current?.token ? current.token : '',
+      },
     };
   });
 

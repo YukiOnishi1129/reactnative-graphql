@@ -67,13 +67,6 @@ export const IsLoginStackNavigator: React.VFC = () => {
           }}
         />
       )}
-      <Stack.Screen
-        name={NAVIGATION_NAME.MAIN}
-        component={MainTabStackNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
     </Stack.Navigator>
   );
 };

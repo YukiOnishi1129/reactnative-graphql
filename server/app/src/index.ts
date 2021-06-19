@@ -43,7 +43,6 @@ async function start() {
         // headers情報にtokenを入れておき、そのtokenからuser情報を取得し、リゾルバへ渡す
         token = req?.headers?.authorization || "";
       }
-
       const currentUser = await authTokenUser(token);
       return { currentUser, pubsub };
     },
