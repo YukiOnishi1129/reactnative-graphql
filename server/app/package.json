@@ -24,10 +24,10 @@
   "author": "",
   "license": "ISC",
   "_moduleAliases": {
-    "@GraphQL": "src/graphql/*",
-    "@Types": "src/types/*",
-    "@Models": "src/models/*",
-    "@Services": "src/services/*"
+    "@GraphQL": "src/graphql",
+    "@Types": "src/types",
+    "@Models": "src/models",
+    "@Services": "src/services"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.5",
