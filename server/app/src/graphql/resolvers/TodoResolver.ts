@@ -128,10 +128,10 @@ export const TodoResolvers: IResolvers = {
         createdAt: todo.createdAt,
       };
 
-      // サブスクリプション起動
-      //   pubsub.publish("NEW_TODO", {
-      //     newTodo: newTodo,
-      //   });
+      // サブスクリプション起動;
+      pubsub.publish("NEW_TODO", {
+        newTodo: newTodo,
+      });
 
       return {
         todo: newTodo,
@@ -178,9 +178,9 @@ export const TodoResolvers: IResolvers = {
       };
 
       // サブスクリプション起動
-      //   pubsub.publish("UPDATED_TODO", {
-      //     updatedTodo: updatedTodo,
-      //   });
+      pubsub.publish("UPDATED_TODO", {
+        updatedTodo: updatedTodo,
+      });
 
       return {
         todo: updatedTodo,
@@ -216,9 +216,9 @@ export const TodoResolvers: IResolvers = {
       };
 
       // サブスクリプション起動
-      //   pubsub.publish("DONE_TODO", {
-      //     doneTodo: newDoneTodo,
-      //   });
+      pubsub.publish("DONE_TODO", {
+        doneTodo: newDoneTodo,
+      });
 
       return {
         todo: newDoneTodo,
@@ -258,9 +258,9 @@ export const TodoResolvers: IResolvers = {
       };
 
       // サブスクリプション起動
-      //   pubsub.publish("ACTIVE_TODO", {
-      //     activeTodo: newActiveTodo,
-      //   });
+      pubsub.publish("ACTIVE_TODO", {
+        activeTodo: newActiveTodo,
+      });
 
       return {
         todo: newActiveTodo,
@@ -300,9 +300,9 @@ export const TodoResolvers: IResolvers = {
       };
 
       // サブスクリプション起動
-      //   pubsub.publish("DELETED_TODO", {
-      //     deletedTodo: deletedTodo,
-      //   });
+      pubsub.publish("DELETED_TODO", {
+        deletedTodo: deletedTodo,
+      });
 
       return {
         todo: deletedTodo,
@@ -312,7 +312,15 @@ export const TodoResolvers: IResolvers = {
 
   Subscription: {
     newTodo: {
-      subscribe: (parent, args, { pubsub }: ResolverContextType) => {
+      subscribe: (
+        parent,
+        args,
+        { currentUser, pubsub }: ResolverContextType
+      ) => {
+        // if (!currentUser) return;
+        // console.log(
+        //   `ユーザー:${(currentUser.id, currentUser.name, currentUser.email)}`
+        // );
         return pubsub.asyncIterator("NEW_TODO");
       },
     },
