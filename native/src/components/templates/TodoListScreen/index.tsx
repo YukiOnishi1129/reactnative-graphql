@@ -27,9 +27,30 @@ export const TodoListTemplate: React.VFC = () => {
   const getAllTodoQuery = useGetAllTodoQuery();
   /* graphql mutation */
 
+  if (getAllTodoQuery.error)
+    return (
+      <BaseScreen>
+        <Text>エラー</Text>
+      </BaseScreen>
+    );
+
   return (
     <BaseScreen>
       <Text>TodoListTemplate</Text>
     </BaseScreen>
   );
 };
+
+/**
+ * styles
+ */
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 30,
+    marginBottom: 30,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    width: '80%',
+    height: 40,
+  },
+});

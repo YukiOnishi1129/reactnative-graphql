@@ -32,6 +32,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.2.0",
     "react-native-screens": "^3.4.0",
+    "react-native-storage": "^1.0.1",
     "react-native-web": "~0.13.12",
     "subscriptions-transport-ws": "^0.9.19"
   },
