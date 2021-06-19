@@ -17,7 +17,6 @@ import {
 } from "@Services/User";
 /* types */
 import { ResolverContextType } from "@Types/Resolver";
-import { UserInfo } from "os";
 
 /**
  * UserResolvers

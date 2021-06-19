@@ -5,8 +5,17 @@
 import { ApolloError } from "apollo-server-errors";
 import { IResolvers } from "graphql-tools";
 /* graphql */
-import { AuthenticateResponse, Todo as TodoGraphQLType } from "../types";
+import { TodoResponse, Todo as TodoGraphQLType } from "../types";
 /* service */
+import {
+  getTodo,
+  getTodoList,
+  createTodo,
+  updateTodo,
+  doneTodo,
+  activeTodo,
+  deleteTodo,
+} from "@Services/Todo";
 /* types */
 import { ResolverContextType } from "@Types/Resolver";
 
@@ -18,7 +27,36 @@ export const TodoResolvers: IResolvers = {
    * Query
    */
   Query: {
-    todo(parent, args) {},
+    /**
+     * todo
+     * @param parent
+     * @param args
+     * @param param2
+     * @returns
+     */
+    async todo(
+      parent,
+      args,
+      { currentUser }: ResolverContextType
+    ): Promise<TodoGraphQLType> {
+      // 認証エラーチェック
+      if (!currentUser) throw new ApolloError("認証エラーです。", "401");
+      if (!args?.input?.id)
+        throw new ApolloError("リクエストパラメータエラーです。", "400");
+
+      const todo = await getTodo(args.input.id, currentUser.id);
+      if (!todo)
+        throw new ApolloError("リクエストパラメータエラーです。", "400");
+
+      return {
+        id: todo.id,
+        title: todo.title,
+        content: todo.content,
+        doneFlg: todo.doneFlg,
+        userId: todo.userId,
+        createdAt: todo.createdAt,
+      };
+    },
     allTodo(parent, args) {},
   },
 
