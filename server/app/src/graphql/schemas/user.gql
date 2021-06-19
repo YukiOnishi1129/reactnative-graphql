@@ -1,0 +1,39 @@
+extend type Query {
+  me: User!
+  allUsers: [User!]!
+}
+
+"""
+input
+"""
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input RegisterInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+extend type Mutation {
+  login(input: LoginInput!): AuthenticateResponse!
+  register(input: RegisterInput!): AuthenticateResponse!
+}
+
+"""
+User
+"""
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  avatar: String!
+  createdAt: DateTime!
+}
+
+type AuthenticateResponse {
+  user: User!
+  token: String!
+}

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@GraphQL/*": ["src/graphql/*"],
+      "@Types/*": ["src/types/*"],
+      "@Models/*": ["src/models/*"],
+      "@Services/*": ["src/services/*"]
+    },
+    "types": ["@types/node", "@types/express"],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["./src/**/*"]
+}
