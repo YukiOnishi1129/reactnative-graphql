@@ -1,0 +1,55 @@
+extend type Query {
+  todo(input: TodoIdInput!): Todo!
+  allTodo: [Todo!]!
+}
+
+extend type Mutation {
+  createTodo(input: CreateTodoInput!): TodoResponse!
+  updateTodo(input: UpdateTodoInput!): TodoResponse!
+  doneTodo(input: TodoIdInput!): TodoResponse!
+  activeTodo(input: TodoIdInput!): TodoResponse!
+  deleteTodo(input: TodoIdInput!): TodoResponse!
+}
+
+extend type Subscription {
+  newTodo: Todo!
+  updatedTodo: Todo!
+  doneTodo: Todo!
+  activeTodo: Todo!
+  deletedTodo: Todo!
+  newAllTodo: [Todo!]!
+}
+
+"""
+input
+"""
+input CreateTodoInput {
+  title: String!
+  content: String!
+}
+
+input UpdateTodoInput {
+  id: Int!
+  title: String!
+  content: String!
+}
+
+input TodoIdInput {
+  id: Int!
+}
+
+"""
+Todo
+"""
+type Todo {
+  id: Int!
+  title: String!
+  content: String!
+  doneFlg: Boolean!
+  userId: Int!
+  createdAt: DateTime!
+}
+
+type TodoResponse {
+  todo: Todo!
+}
