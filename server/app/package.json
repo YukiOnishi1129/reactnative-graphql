@@ -4,11 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc",
+    "ts-node": "ts-node",
+    "start": "nodemon ./src/index.ts",
+    "watch": "ts-node-dev ./src/index.ts",
+    "lint": "eslint --ext '.js,.ts' ./src/**",
+    "lint-fix": "eslint --fix --ext '.js,.ts' ./src/**",
+    "generate": "graphql-codegen --config codegen.yml",
+    "create:model": "ts-node ./node_modules/.bin/typeorm entity:create --name",
+    "db:migration:generate": "ts-node ./node_modules/.bin/typeorm migration:generate --name",
+    "db:migration:run": "ts-node ./node_modules/.bin/typeorm migration:run",
+    "db:migration:revert": "ts-node ./node_modules/.bin/typeorm migration:revert",
+    "db:schema:drop": "ts-node ./node_modules/.bin/typeorm schema:drop",
+    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "db:init": "yarn db:schema:drop && yarn db:migration:run && yarn seed:run",
+    "test:command": "ts-node ./src/utils/test.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "_moduleAliases": {
+    "@GraphQL": "src/graphql/*",
+    "@Types": "src/types/*",
+    "@Models": "src/models/*",
+    "@Services": "src/services/*"
+  },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.5",
     "@graphql-codegen/introspection": "^1.18.2",
