@@ -154,3 +154,25 @@ export const registerUser = async (
     console.log(error);
   }
 };
+
+/**
+ * 同一Emailのユーザー存在確認処理
+ * @param email
+ * @returns
+ */
+export const isSameEmailUser = async (email: string) => {
+  const userRepository = getRepository(UserModel);
+
+  try {
+    const user = await userRepository.findOne({
+      where: { email: email, deleteFlg: 0 },
+    });
+
+    if (!user) return false;
+
+    return true;
+  } catch (error) {
+    console.log(error);
+    return true;
+  }
+};

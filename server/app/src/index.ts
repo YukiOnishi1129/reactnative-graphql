@@ -8,6 +8,8 @@ import { ApolloServer, PubSub } from "apollo-server-express";
 import { createConnection } from "typeorm";
 /* schema */
 import schema from "./graphql/schemasMap";
+/* services */
+import { authTokenUser } from "@Services/User";
 
 /**
  * start
@@ -23,8 +25,16 @@ async function start() {
 
   const server = new ApolloServer({
     schema,
-    context: () => {
-      return { pubsub };
+    context: async ({ req, connection }) => {
+      let token = "";
+      if (connection) {
+        token = connection.context.authorization || "";
+      } else {
+        token = req?.headers?.authorization || "";
+      }
+
+      const currentUser = await authTokenUser(token);
+      return { currentUser, pubsub };
     },
   });
 
