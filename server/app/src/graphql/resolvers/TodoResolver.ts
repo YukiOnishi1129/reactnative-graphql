@@ -96,7 +96,44 @@ export const TodoResolvers: IResolvers = {
    * Mutation
    */
   Mutation: {
-    createTodo(parent, args) {},
+    async createTodo(
+      parent,
+      args,
+      { currentUser, pubsub }: ResolverContextType
+    ): Promise<TodoResponse> {
+      // 認証エラーチェック
+      if (!currentUser) throw new ApolloError("認証エラーです。", "401");
+
+      if (
+        !args?.input?.title ||
+        (!args?.input?.content && args?.input?.content !== "")
+      )
+        throw new ApolloError("リクエストパラメータエラーです。", "400");
+
+      const todo = await createTodo(
+        args.input.title,
+        args.input.content,
+        currentUser.id
+      );
+
+      if (!todo)
+        throw new ApolloError("リクエストパラメータエラーです。", "400");
+
+      const newTodo: TodoGraphQLType = {
+        id: todo.id,
+        title: todo.title,
+        content: todo.content,
+        doneFlg: todo.doneFlg,
+        userId: todo.userId,
+        createdAt: todo.createdAt,
+      };
+
+      // サブスクリプション起動
+
+      return {
+        todo: newTodo,
+      };
+    },
     updateTodo(parent, args) {},
     doneTodo(parent, args) {},
     activeTodo(parent, args) {},
