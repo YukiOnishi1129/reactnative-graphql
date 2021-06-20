@@ -37,7 +37,6 @@ export const GraphQLApolloProvider: React.VFC<Props> = ({ children }: Props) => 
 
   const authLink = setContext(async (_, { headers }) => {
     const current = await repo.load();
-    console.log(current);
     return {
       headers: {
         ...headers,

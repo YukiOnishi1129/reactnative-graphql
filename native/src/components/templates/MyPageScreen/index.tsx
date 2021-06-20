@@ -3,31 +3,29 @@
  * @package components
  */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { Input } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Text } from 'react-native';
 /* storages */
 import { getUserStorage } from '@Storage/Storage';
 /* contexts */
 import { useAppDispatch, logout } from '@Context/AppContext';
-/* graphql */
-import {} from '@Hook/useGraphQL';
 /* components */
 import { BaseScreen } from '@Component/layouts/BaseScreen';
-/* styles */
-import { Theme } from '@Style/Theme';
+import { Detail } from './organisms/Detail';
+import { ActionButton } from '@Component/common/ActionButton';
+/* hooks */
+import { useGetMyUserQuery } from '@Hook/useGraphQL';
 
 /**
  * MyPageTemplate
  * @returns
  */
 export const MyPageTemplate: React.VFC = () => {
-  /* graphql query */
-  /* graphql mutation */
   /* contexts */
   const dispatch = useAppDispatch();
   /* storage */
   const repo = getUserStorage();
+  /* graphql query */
+  const getMyUserQuery = useGetMyUserQuery();
 
   /**
    * ログアウト
@@ -39,10 +37,13 @@ export const MyPageTemplate: React.VFC = () => {
 
   return (
     <BaseScreen>
+      {getMyUserQuery?.loading && <Text>Loading...</Text>}
+      {getMyUserQuery?.error && <Text>エラー</Text>}
       <Text style={styles.title}>MyPage</Text>
-      <TouchableOpacity onPress={onLogout} style={styles.logoutArea}>
-        <Text style={styles.logoutButton}>ログアウト</Text>
-      </TouchableOpacity>
+      {getMyUserQuery?.data?.me && <Detail user={getMyUserQuery.data.me} />}
+      <View style={styles.logoutArea}>
+        <ActionButton title="ログアウト" onPress={onLogout} />
+      </View>
     </BaseScreen>
   );
 };
@@ -59,19 +60,7 @@ const styles = StyleSheet.create({
   },
   logoutArea: {
     marginTop: 10,
-    marginBottom: 10,
     marginRight: 'auto',
     marginLeft: 'auto',
-  },
-  logoutButton: {
-    width: '50%',
-    borderRadius: 50,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingRight: 20,
-    paddingLeft: 20,
-    backgroundColor: Theme.color.deepGreen.full,
-    color: Theme.color.offWhite.full,
-    fontWeight: 'bold',
   },
 });

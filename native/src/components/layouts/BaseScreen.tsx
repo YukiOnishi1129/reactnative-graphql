@@ -3,7 +3,7 @@
  * @package components
  */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 /* styles */
 import { Theme } from '@Style/Theme';
 
