@@ -3,7 +3,7 @@
  * @package components
  */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 /* storages */
 import { getUserStorage } from '@Storage/Storage';
 /* contexts */
