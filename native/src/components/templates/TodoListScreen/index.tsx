@@ -3,23 +3,23 @@
  * @package components
  */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 /* components */
 import { BaseScreen } from '@Component/layouts/BaseScreen';
 import { InputForm } from '@Component/common/InputForm';
 import { ActionButton } from '@Component/common/ActionButton';
+import { Todo } from './organisms/Todo';
 /* graphql */
 import {
   useGetAllTodoQuery,
   useCreateTodoMutation,
-  useUpdateTodoMutation,
   useDoneTodoMutation,
   useActiveTodoMutation,
   useDeleteTodoMutation,
 } from '@Hook/useGraphQL';
 
 /* logics */
-import { showAlertDialog } from '@Logic/CommonLogics';
+import { showAlertDialog, showConfirmDialog } from '@Logic/CommonLogics';
 
 /**
  * TodoListTemplate
@@ -30,6 +30,9 @@ export const TodoListTemplate: React.VFC = () => {
   const getAllTodoQuery = useGetAllTodoQuery();
   /* graphql mutation */
   const [createTodoMutation] = useCreateTodoMutation();
+  const [doneTodoMutation] = useDoneTodoMutation();
+  const [activeTodoMutation] = useActiveTodoMutation();
+  const [deleteTodoMutation] = useDeleteTodoMutation();
 
   /* local */
   const [inputTodo, setInputTodo] = React.useState('');
@@ -70,25 +73,127 @@ export const TodoListTemplate: React.VFC = () => {
       showAlertDialog('Todo追加完了', 'Todoを追加しました。');
       // 初期化
       setInputTodo('');
+      // Todoリスト再読み込み
+      getAllTodoQuery.refetch();
     } catch (error) {
       console.log(error.message);
     }
   };
 
+  /**
+   * Todo完了
+   * @param targetId
+   */
+  const onDoneTodo = async (targetId: number) => {
+    await doneTodoMutation({
+      variables: {
+        doneTodoInput: {
+          id: targetId,
+        },
+      },
+    });
+
+    showAlertDialog('Todo完了', `id: ${targetId}のTodoを完了しました。`);
+    // Todoリスト再読み込み
+    getAllTodoQuery.refetch();
+  };
+
+  /**
+   * onActionTodo
+   * @param targetId
+   * @param doneFlg
+   */
+  const onActionTodo = async (targetId: number, doneFlg: boolean) => {
+    if (!doneFlg) {
+      await onDoneTodo(targetId);
+    } else {
+      await onActiveTodo(targetId);
+    }
+  };
+
+  /**
+   * Todo未完了
+   * @param targetId
+   */
+  const onActiveTodo = async (targetId: number) => {
+    await activeTodoMutation({
+      variables: {
+        activeTodoInput: {
+          id: targetId,
+        },
+      },
+    });
+
+    showAlertDialog('Todo未完了', `id: ${targetId}のTodoを未完了しました。`);
+    // Todoリスト再読み込み
+    getAllTodoQuery.refetch();
+  };
+
+  /**
+   * Todo削除処理
+   * @param targetId
+   */
+  const onDeleteAction = (targetId: number) => {
+    const onDeleteTodo = async () => {
+      await deleteTodoMutation({
+        variables: {
+          deleteTodoInput: {
+            id: targetId,
+          },
+        },
+      });
+
+      showAlertDialog('Todo削除', `id: ${targetId}のTodoを削除しました。`);
+      // Todoリスト再読み込み
+      getAllTodoQuery.refetch();
+    };
+
+    showConfirmDialog('Todo削除処理', `id: ${targetId}のTodoを削除しますか？`, () =>
+      onDeleteTodo(),
+    );
+  };
+
+  /**
+   * Todo詳細画面へ遷移
+   * @param targetId
+   */
+  const onMoveTodo = (targetId: number) => {
+    console.log(targetId);
+  };
+
   return (
     <BaseScreen>
-      {getAllTodoQuery.loading && <Text>Loading...</Text>}
-      {getAllTodoQuery.error && <Text>{getAllTodoQuery?.error}</Text>}
+      {getAllTodoQuery?.loading && <Text>Loading...</Text>}
+      {getAllTodoQuery?.error && <Text>エラー</Text>}
       <Text style={styles.title}>TodoList</Text>
 
       <View style={styles.inputFrom}>
-        <View style={styles.inputArea}>
+        <View>
           <InputForm label="Todoタイトル" value={inputTodo} onChangeText={onChangeInputTodo} />
         </View>
         <View style={styles.ButtonArea}>
           <ActionButton title="Todo追加" onPress={onAddTodo} />
         </View>
       </View>
+
+      {getAllTodoQuery?.data?.allTodo && getAllTodoQuery.data.allTodo.length !== 0 && (
+        <View style={styles.TodoListArea}>
+          <ScrollView>
+            {getAllTodoQuery.data.allTodo.map((todo) => {
+              return (
+                <View key={todo.id} style={styles.todo}>
+                  <Todo
+                    todo={todo}
+                    onActionTodo={onActionTodo}
+                    onMoveTodo={onMoveTodo}
+                    onDeleteTodo={onDeleteAction}
+                  />
+                </View>
+              );
+            })}
+          </ScrollView>
+        </View>
+      )}
     </BaseScreen>
   );
 };
@@ -104,16 +209,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   inputFrom: {
-    marginTop: 50,
-    marginBottom: 50,
-  },
-  inputArea: {
-    marginBottom: 20,
+    marginTop: 20,
   },
   ButtonArea: {
     marginTop: 10,
-    marginBottom: 10,
     marginRight: 'auto',
     marginLeft: 'auto',
+  },
+  TodoListArea: {
+    marginTop: 10,
+    marginBottom: 10,
+    height: 450,
+  },
+  todo: {
+    marginBottom: 10,
   },
 });

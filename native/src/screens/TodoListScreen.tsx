@@ -23,7 +23,5 @@ export const TodoListScreen: React.VFC = () => {
   const getAllTodoQuery = useGetAllTodoQuery();
   /* graphql mutation */
 
-  console.log(getAllTodoQuery.error);
-
   return <TodoListTemplate />;
 };
