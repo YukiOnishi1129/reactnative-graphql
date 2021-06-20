@@ -8,7 +8,8 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { BaseScreen } from '@Component/layouts/BaseScreen';
 import { InputForm } from '@Component/common/InputForm';
 import { ActionButton } from '@Component/common/ActionButton';
-import { Todo } from './organisms/Todo';
+import { ActiveTodo } from './organisms/ActiveTodo';
+import { DoneTodo } from './organisms/DoneTodo';
 /* hooks */
 import {
   useGetAllTodoQuery,
@@ -202,16 +203,29 @@ export const TodoListTemplate: React.VFC = () => {
         <View style={styles.TodoListArea}>
           <ScrollView>
             {getAllTodoQuery.data.allTodo.map((todo) => {
-              return (
-                <View key={todo.id} style={styles.todo}>
-                  <Todo
-                    todo={todo}
-                    onActionTodo={onActionTodo}
-                    onMoveTodo={onMoveTodo}
-                    onDeleteTodo={onDeleteAction}
-                  />
-                </View>
-              );
+              if (todo.doneFlg) {
+                return (
+                  <View key={todo.id} style={styles.todo}>
+                    <DoneTodo
+                      todo={todo}
+                      onActionTodo={onActionTodo}
+                      onMoveTodo={onMoveTodo}
+                      onDeleteTodo={onDeleteAction}
+                    />
+                  </View>
+                );
+              } else {
+                return (
+                  <View key={todo.id} style={styles.todo}>
+                    <ActiveTodo
+                      todo={todo}
+                      onActionTodo={onActionTodo}
+                      onMoveTodo={onMoveTodo}
+                      onDeleteTodo={onDeleteAction}
+                    />
+                  </View>
+                );
+              }
             })}
           </ScrollView>
         </View>

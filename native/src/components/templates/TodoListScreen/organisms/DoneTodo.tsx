@@ -1,5 +1,5 @@
 /**
- * Todo
+ * DoneTodo
  * @package components
  */
 import React from 'react';
@@ -23,20 +23,19 @@ type Props = {
 };
 
 /**
- * Todo
+ * DoneTodo
  * @param {Props} props
  * @returns
  */
-export const Todo: React.VFC<Props> = ({ todo, onActionTodo, onMoveTodo, onDeleteTodo }: Props) => {
-  const todoColor = todo.doneFlg ? styles.doneColor : styles.activeColor;
-
+export const DoneTodo: React.VFC<Props> = ({
+  todo,
+  onActionTodo,
+  onMoveTodo,
+  onDeleteTodo,
+}: Props) => {
   return (
-    <View key={todo.id} style={[styles.list, todoColor]}>
-      {todo.doneFlg ? (
-        <CheckBoxForm targetId={todo.id} doneFlg={todo.doneFlg} onActionTodo={onActionTodo} />
-      ) : (
-        <CheckBoxForm targetId={todo.id} doneFlg={todo.doneFlg} onActionTodo={onActionTodo} />
-      )}
+    <View key={todo.id} style={[styles.list]}>
+      <CheckBoxForm targetId={todo.id} doneFlg={todo.doneFlg} onActionTodo={onActionTodo} />
 
       <Text style={styles.title}>{todo.title}</Text>
       <View style={styles.iconArea}>
@@ -73,12 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     height: 80,
     borderRadius: 10,
-  },
-  doneColor: {
     backgroundColor: Theme.color.deepGreen.twenty,
-  },
-  activeColor: {
-    backgroundColor: Theme.color.deepGreen.full,
   },
   check: {
     marginTop: 25,
