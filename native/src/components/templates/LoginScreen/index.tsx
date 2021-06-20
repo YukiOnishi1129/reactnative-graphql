@@ -3,7 +3,7 @@
  * @package components
  */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 /* storages */
 import { getUserStorage } from '@Storage/Storage';
 /* contexts */
@@ -16,8 +16,6 @@ import { ActionButton } from '@Component/common/ActionButton';
 import { useSignInMutation } from '@Hook/useGraphQL';
 /* logics */
 import { showAlertDialog } from '@Logic/CommonLogics';
-/* styles */
-import { Theme } from '@Style/Theme';
 
 /**
  * LoginTemplate
@@ -28,12 +26,12 @@ export const LoginTemplate: React.VFC = () => {
   const dispatch = useAppDispatch();
   /* graphql mutation */
   const [loginMutation, { loading: mutationLoading, error: mutationError }] = useSignInMutation();
-  /* local */
-  const [userEmail, setUserEmail] = React.useState('');
-  const [userPassword, setUserPassword] = React.useState('');
   /* storage */
   const repo = getUserStorage();
   const entity = repo.getEntity();
+  /* local */
+  const [userEmail, setUserEmail] = React.useState('');
+  const [userPassword, setUserPassword] = React.useState('');
 
   /**
    * useEmail変更処理
@@ -80,8 +78,10 @@ export const LoginTemplate: React.VFC = () => {
       entity.userId = result.data?.login?.user.id;
       entity.token = result.data?.login?.token;
 
+      // AsyncStorageに保存
       await repo.save();
 
+      // globalStateに保存
       dispatch(login(entity.userId, entity.token));
     } catch (error) {
       console.log(error.message);
@@ -106,10 +106,6 @@ export const LoginTemplate: React.VFC = () => {
       <View style={styles.ButtonArea}>
         <ActionButton title="ログイン" onPress={onLogin} />
       </View>
-
-      {/* <TouchableOpacity style={styles.loginArea} onPress={onLogin}>
-        <Text style={styles.loginButton}>ログイン</Text>
-      </TouchableOpacity> */}
     </BaseScreen>
   );
 };
@@ -136,16 +132,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginRight: 'auto',
     marginLeft: 'auto',
-  },
-  loginButton: {
-    width: '50%',
-    borderRadius: 50,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingRight: 20,
-    paddingLeft: 20,
-    backgroundColor: Theme.color.deepGreen.full,
-    color: Theme.color.offWhite.full,
-    fontWeight: 'bold',
   },
 });
