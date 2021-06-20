@@ -34,6 +34,7 @@ export const RegisterTemplate: React.VFC = () => {
   const [userName, setUserName] = React.useState('');
   const [userEmail, setUserEmail] = React.useState('');
   const [userPassword, setUserPassword] = React.useState('');
+  const [userConfirmPassword, setUserConfirmPassword] = React.useState('');
 
   /**
    * userName変更処理
@@ -60,12 +61,25 @@ export const RegisterTemplate: React.VFC = () => {
   };
 
   /**
+   * userPassword変更処理
+   * @param text
+   */
+  const onChangeConfirmPassword = (text: string) => {
+    setUserConfirmPassword(text);
+  };
+
+  /**
    * 会員登録
    * @returns
    */
   const onRegister = async () => {
-    if (userName === '' || userEmail === '' || userPassword === '') {
+    if (userName === '' || userEmail === '' || userPassword === '' || userConfirmPassword === '') {
       showAlertDialog('未入力', '入力値がありません。');
+      return;
+    }
+
+    if (userPassword !== userConfirmPassword) {
+      showAlertDialog('パスワードエラー', '入力値がパスワード(確認)と異なります。');
       return;
     }
 
@@ -112,8 +126,15 @@ export const RegisterTemplate: React.VFC = () => {
         <View style={styles.inputArea}>
           <InputForm label="メールアドレス" value={userEmail} onChangeText={onChangeEmail} />
         </View>
-        <View>
+        <View style={styles.inputArea}>
           <InputForm label="パスワード" value={userPassword} onChangeText={onChangePassword} />
+        </View>
+        <View>
+          <InputForm
+            label="パスワード(確認)"
+            value={userConfirmPassword}
+            onChangeText={onChangeConfirmPassword}
+          />
         </View>
       </View>
 
