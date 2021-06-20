@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 /* components */
 import { BaseScreen } from '@Component/layouts/BaseScreen';
 import { InputForm } from '@Component/common/InputForm';
@@ -21,12 +22,16 @@ import {
 import { useCustomSubscription } from '@Hook/useCustomSubscription';
 /* logics */
 import { showAlertDialog, showConfirmDialog } from '@Logic/CommonLogics';
+/* constants */
+import { NAVIGATION_NAME } from '@Constant/navigation';
 
 /**
  * TodoListTemplate
  * @returns
  */
 export const TodoListTemplate: React.VFC = () => {
+  /* navigation */
+  const nav = useNavigation();
   /* graphql query */
   const getAllTodoQuery = useGetAllTodoQuery();
   /* graphql mutation */
@@ -181,7 +186,10 @@ export const TodoListTemplate: React.VFC = () => {
    * @param targetId
    */
   const onMoveTodo = (targetId: number) => {
-    console.log(targetId);
+    // TodoDetail画面にリダイレクト
+    nav.navigate(NAVIGATION_NAME.TODO_DETAIL, {
+      todoId: targetId,
+    });
   };
 
   return (
@@ -201,7 +209,7 @@ export const TodoListTemplate: React.VFC = () => {
 
       {getAllTodoQuery?.data?.allTodo && getAllTodoQuery.data.allTodo.length !== 0 && (
         <View style={styles.TodoListArea}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             {getAllTodoQuery.data.allTodo.map((todo) => {
               if (todo.doneFlg) {
                 return (

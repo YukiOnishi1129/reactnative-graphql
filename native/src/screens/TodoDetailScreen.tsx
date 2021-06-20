@@ -3,29 +3,29 @@
  * @package screens
  */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
-import { Input } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
-/* graphql */
-import {
-  useGetAllTodoQuery,
-  useCreateTodoMutation,
-  useUpdateTodoMutation,
-  useDoneTodoMutation,
-  useActiveTodoMutation,
-  useDeleteTodoMutation,
-} from '@Hook/useGraphQL';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 /* components */
 import { TodoDetailTemplate } from '@Component/templates/TodoDetailScreen';
+/* types */
+import { RootStackParamListType } from '@Type/navigation';
+
+/**
+ * props
+ */
+type Props = {
+  navigation: StackNavigationProp<RootStackParamListType, 'TodoDetail'>;
+  route: RouteProp<RootStackParamListType, 'TodoDetail'>;
+};
 
 /**
  * TodoDetailScreen
+ * @param props
  * @returns
  */
-export const TodoDetailScreen: React.VFC = () => {
-  /* graphql query */
-  const getAllTodoQuery = useGetAllTodoQuery();
-  /* graphql mutation */
+export const TodoDetailScreen: React.VFC<Props> = ({ route }: Props) => {
+  /* routes */
+  const todoId = route.params.todoId;
 
-  return <TodoDetailTemplate />;
+  return <TodoDetailTemplate todoId={todoId} />;
 };

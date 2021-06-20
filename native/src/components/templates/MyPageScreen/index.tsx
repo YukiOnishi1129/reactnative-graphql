@@ -3,15 +3,11 @@
  * @package components
  */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { Input } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 /* storages */
 import { getUserStorage } from '@Storage/Storage';
 /* contexts */
 import { useAppDispatch, logout } from '@Context/AppContext';
-/* graphql */
-import {} from '@Hook/useGraphQL';
 /* components */
 import { BaseScreen } from '@Component/layouts/BaseScreen';
 /* styles */
@@ -22,8 +18,6 @@ import { Theme } from '@Style/Theme';
  * @returns
  */
 export const MyPageTemplate: React.VFC = () => {
-  /* graphql query */
-  /* graphql mutation */
   /* contexts */
   const dispatch = useAppDispatch();
   /* storage */
