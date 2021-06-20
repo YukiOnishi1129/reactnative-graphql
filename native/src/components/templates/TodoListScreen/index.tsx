@@ -9,7 +9,7 @@ import { BaseScreen } from '@Component/layouts/BaseScreen';
 import { InputForm } from '@Component/common/InputForm';
 import { ActionButton } from '@Component/common/ActionButton';
 import { Todo } from './organisms/Todo';
-/* graphql */
+/* hooks */
 import {
   useGetAllTodoQuery,
   useCreateTodoMutation,
@@ -17,7 +17,7 @@ import {
   useActiveTodoMutation,
   useDeleteTodoMutation,
 } from '@Hook/useGraphQL';
-
+import { useCustomSubscription } from '@Hook/useCustomSubscription';
 /* logics */
 import { showAlertDialog, showConfirmDialog } from '@Logic/CommonLogics';
 
@@ -33,9 +33,31 @@ export const TodoListTemplate: React.VFC = () => {
   const [doneTodoMutation] = useDoneTodoMutation();
   const [activeTodoMutation] = useActiveTodoMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
+  /* graphql subscription */
+  const {
+    getTodoSubscription,
+    getUpdatedTodoSubscription,
+    getDoneTodoSubscription,
+    getActiveTodoSubscription,
+    getDeleteTodoSubscription,
+  } = useCustomSubscription();
 
   /* local */
   const [inputTodo, setInputTodo] = React.useState('');
+
+  React.useEffect(() => {
+    getTodoSubscription;
+    getUpdatedTodoSubscription;
+    getDoneTodoSubscription;
+    getActiveTodoSubscription;
+    getDeleteTodoSubscription;
+  }, [
+    getTodoSubscription,
+    getUpdatedTodoSubscription,
+    getDoneTodoSubscription,
+    getActiveTodoSubscription,
+    getDeleteTodoSubscription,
+  ]);
 
   /**
    * inputTodo変更処理
