@@ -1,0 +1,38 @@
+overwrite: true
+schema:
+  - ../server/app/src/graphql/schemas/**/*.gql
+documents:
+  - src/graphql/queries.gql
+generates:
+  # スキーマの型定義
+  src/types/schemas.ts:
+    plugins:
+      - typescript
+    config:
+      scalars:
+        DateTime: Date
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+
+  # 操作の型定義
+  src/types/operations.ts:
+    preset: import-types
+    presetConfig:
+      typesPath: ../types/schemas
+    plugins:
+      - typescript-operations
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+
+  # query関数の定義
+  src/hooks/useGraphQL.ts:
+    preset: import-types
+    presetConfig:
+      typesPath: ../types/operations
+    plugins:
+      - typescript-react-apollo
+    hooks:
+      afterOneFileWrite:
+        - prettier --write

@@ -1,21 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * App.tsx
+ */
+import React from 'react'; /* providers */
+import { GraphQLApolloProvider } from '@Provider/GraphQLApolloProvider';
+/* contexts */
+import { AppContextProvider } from '@Context/AppContext';
+/* routes */
+import { AppNavigator } from '@Route/index';
 
-export default function App() {
+/**
+ * App
+ * @returns
+ */
+const App = (): JSX.Element => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppContextProvider>
+      <GraphQLApolloProvider>
+        <AppNavigator />
+      </GraphQLApolloProvider>
+    </AppContextProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
