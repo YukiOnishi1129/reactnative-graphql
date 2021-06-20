@@ -3,15 +3,15 @@
  * @package components
  */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
-import { Input } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 /* storages */
 import { getUserStorage } from '@Storage/Storage';
 /* contexts */
 import { useAppDispatch, login } from '@Context/AppContext';
 /* components */
 import { BaseScreen } from '@Component/layouts/BaseScreen';
+import { InputForm } from '@Component/common/InputForm';
+import { ActionButton } from '@Component/common/ActionButton';
 /* hooks */
 import { useSignInMutation } from '@Hook/useGraphQL';
 /* logics */
@@ -51,6 +51,10 @@ export const LoginTemplate: React.VFC = () => {
     setUserPassword(text);
   };
 
+  /**
+   * ログイン
+   * @returns
+   */
   const onLogin = async () => {
     if (userEmail === '' || userPassword === '') {
       showAlertDialog('未入力', '入力値がありません。');
@@ -89,17 +93,23 @@ export const LoginTemplate: React.VFC = () => {
       {mutationLoading && <Text>Loading...</Text>}
       {mutationError && <Text>{mutationError.message}</Text>}
       <Text style={styles.title}>SignIn</Text>
-      <View>
-        <Text>メールアドレス</Text>
-        <Input value={userEmail} onChangeText={onChangeEmail} />
+
+      <View style={styles.inputFrom}>
+        <View style={styles.inputArea}>
+          <InputForm label="メールアドレス" value={userEmail} onChangeText={onChangeEmail} />
+        </View>
+        <View>
+          <InputForm label="パスワード" value={userPassword} onChangeText={onChangePassword} />
+        </View>
       </View>
-      <View>
-        <Text>パスワード</Text>
-        <Input value={userPassword} onChangeText={onChangePassword} />
+
+      <View style={styles.ButtonArea}>
+        <ActionButton title="ログイン" onPress={onLogin} />
       </View>
-      <TouchableOpacity style={styles.loginArea} onPress={onLogin}>
+
+      {/* <TouchableOpacity style={styles.loginArea} onPress={onLogin}>
         <Text style={styles.loginButton}>ログイン</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </BaseScreen>
   );
 };
@@ -114,7 +124,14 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 24,
   },
-  loginArea: {
+  inputFrom: {
+    marginTop: 50,
+    marginBottom: 50,
+  },
+  inputArea: {
+    marginBottom: 20,
+  },
+  ButtonArea: {
     marginTop: 10,
     marginBottom: 10,
     marginRight: 'auto',
