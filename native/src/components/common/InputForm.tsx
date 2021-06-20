@@ -16,7 +16,7 @@ type Props = React.ComponentPropsWithRef<typeof Input>;
  * @returns
  */
 export const InputForm: React.VFC<Props> = (props: Props) => {
-  const { label, value, onChangeText } = props;
+  const { label, value, disabled = false, onChangeText } = props;
 
-  return <Input label={label} value={value} onChangeText={onChangeText} />;
+  return <Input label={label} disabled={disabled} value={value} onChangeText={onChangeText} />;
 };

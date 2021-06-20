@@ -3,7 +3,7 @@
  * @package components
  */
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 /* storages */
 import { getUserStorage } from '@Storage/Storage';
 /* contexts */
@@ -117,30 +117,32 @@ export const RegisterTemplate: React.VFC = () => {
     <BaseScreen>
       {mutationLoading && <Text>Loading...</Text>}
       {mutationError && <Text>{mutationError.message}</Text>}
-      <Text style={styles.title}>SignUp</Text>
 
-      <View style={styles.inputFrom}>
-        <View style={styles.inputArea}>
-          <InputForm label="お名前" value={userName} onChangeText={onChangeName} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Text style={styles.title}>SignUp</Text>
+        <View style={styles.inputFrom}>
+          <View style={styles.inputArea}>
+            <InputForm label="お名前" value={userName} onChangeText={onChangeName} />
+          </View>
+          <View style={styles.inputArea}>
+            <InputForm label="メールアドレス" value={userEmail} onChangeText={onChangeEmail} />
+          </View>
+          <View style={styles.inputArea}>
+            <InputForm label="パスワード" value={userPassword} onChangeText={onChangePassword} />
+          </View>
+          <View>
+            <InputForm
+              label="パスワード(確認)"
+              value={userConfirmPassword}
+              onChangeText={onChangeConfirmPassword}
+            />
+          </View>
         </View>
-        <View style={styles.inputArea}>
-          <InputForm label="メールアドレス" value={userEmail} onChangeText={onChangeEmail} />
-        </View>
-        <View style={styles.inputArea}>
-          <InputForm label="パスワード" value={userPassword} onChangeText={onChangePassword} />
-        </View>
-        <View>
-          <InputForm
-            label="パスワード(確認)"
-            value={userConfirmPassword}
-            onChangeText={onChangeConfirmPassword}
-          />
-        </View>
-      </View>
 
-      <View style={styles.ButtonArea}>
-        <ActionButton title="会員登録" onPress={onRegister} />
-      </View>
+        <View style={styles.ButtonArea}>
+          <ActionButton title="会員登録" onPress={onRegister} />
+        </View>
+      </ScrollView>
     </BaseScreen>
   );
 };
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
   },
   inputFrom: {
     marginTop: 50,
-    marginBottom: 50,
+    marginBottom: 30,
   },
   inputArea: {
     marginBottom: 20,

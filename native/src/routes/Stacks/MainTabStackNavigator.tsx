@@ -52,7 +52,8 @@ export const HomeStack: React.VFC = () => {
         component={TodoDetailScreen}
         options={{
           ...headerScreenOptions,
-          headerTitle: 'Todo',
+          title: '',
+          headerBackTitleVisible: false,
         }}
       />
     </Stack.Navigator>
