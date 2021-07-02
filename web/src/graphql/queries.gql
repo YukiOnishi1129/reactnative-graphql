@@ -1,0 +1,140 @@
+query GetMyUser {
+  me {
+    ...GetUser
+  }
+}
+
+query GetAllUser {
+  allUsers {
+    ... on User {
+      ...GetUser
+    }
+  }
+}
+
+fragment GetUser on User {
+  id
+  name
+  email
+  avatar
+  createdAt
+}
+
+query GetTodoDetail($todoIdInput: TodoIdInput!) {
+  todo(input: $todoIdInput) {
+    ...GetTodo
+  }
+}
+
+query GetAllTodo {
+  allTodo {
+    ... on Todo {
+      ...GetTodo
+    }
+  }
+}
+
+fragment GetTodo on Todo {
+  id
+  title
+  content
+  doneFlg
+  userId
+  createdAt
+}
+
+mutation SignIn($loginInput: LoginInput!) {
+  login(input: $loginInput) {
+    user {
+      ...GetUser
+    }
+    token
+  }
+}
+
+mutation SignUp($registerInput: RegisterInput!) {
+  register(input: $registerInput) {
+    user {
+      ...GetUser
+    }
+    token
+  }
+}
+
+mutation CreateTodo($createTodoInput: CreateTodoInput!) {
+  createTodo(input: $createTodoInput) {
+    todo {
+      ...GetTodo
+    }
+  }
+}
+
+mutation UpdateTodo($updateTodoInput: UpdateTodoInput!) {
+  updateTodo(input: $updateTodoInput) {
+    todo {
+      ...GetTodo
+    }
+  }
+}
+
+mutation DoneTodo($doneTodoInput: TodoIdInput!) {
+  doneTodo(input: $doneTodoInput) {
+    todo {
+      ...GetTodo
+    }
+  }
+}
+
+mutation ActiveTodo($activeTodoInput: TodoIdInput!) {
+  activeTodo(input: $activeTodoInput) {
+    todo {
+      ...GetTodo
+    }
+  }
+}
+
+mutation DeleteTodo($deleteTodoInput: TodoIdInput!) {
+  deleteTodo(input: $deleteTodoInput) {
+    todo {
+      ...GetTodo
+    }
+  }
+}
+
+subscription NewTodo {
+  newTodo {
+    ...GetTodo
+  }
+}
+
+subscription UpdatedTodo {
+  updatedTodo {
+    ...GetTodo
+  }
+}
+
+subscription HaveDoneTodo {
+  doneTodo {
+    ...GetTodo
+  }
+}
+
+subscription HaveActiveTodo {
+  activeTodo {
+    ...GetTodo
+  }
+}
+
+subscription DeletedTodo {
+  deletedTodo {
+    ...GetTodo
+  }
+}
+
+subscription NewAllTodo {
+  newAllTodo {
+    ... on Todo {
+      ...GetTodo
+    }
+  }
+}
