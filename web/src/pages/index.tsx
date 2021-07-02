@@ -3,16 +3,14 @@
  * @package pages
  * @copyright Yuki Onishi
  */
+import React from "react";
+/* components */
+import { TopTemplate } from "@/components/templates/Top/index";
 
 /**
  * IndexPage
  * @returns
  */
-const IndexPage = () => (
-  <div>
-    <h1>Hello Next.js 👋</h1>
-    <p></p>
-  </div>
-);
+const IndexPage = () => <TopTemplate />;
 
 export default IndexPage;
