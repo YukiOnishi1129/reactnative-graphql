@@ -5,12 +5,17 @@
  */
 import React from "react";
 /* components */
+import { BaseLayout } from "@/components/layouts/BaseLayout";
 import { TopTemplate } from "@/components/templates/Top/index";
 
 /**
  * IndexPage
  * @returns
  */
-const IndexPage = () => <TopTemplate />;
+const IndexPage = () => (
+  <BaseLayout>
+    <TopTemplate />
+  </BaseLayout>
+);
 
 export default IndexPage;

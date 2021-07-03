@@ -58,6 +58,17 @@ export type SignUpMutation = { __typename?: "Mutation" } & {
   > & { user: { __typename?: "User" } & GetUserFragment };
 };
 
+export type AuthenticationMutationVariables = Types.Exact<{
+  authInput: Types.AuthInput;
+}>;
+
+export type AuthenticationMutation = { __typename?: "Mutation" } & {
+  authentication: { __typename?: "AuthenticateResponse" } & Pick<
+    Types.AuthenticateResponse,
+    "token"
+  > & { user: { __typename?: "User" } & GetUserFragment };
+};
+
 export type CreateTodoMutationVariables = Types.Exact<{
   createTodoInput: Types.CreateTodoInput;
 }>;

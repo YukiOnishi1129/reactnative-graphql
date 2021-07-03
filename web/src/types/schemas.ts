@@ -16,6 +16,10 @@ export type Scalars = {
   DateTime: Date;
 };
 
+export type AuthInput = {
+  token: Scalars["String"];
+};
+
 export type AuthenticateResponse = {
   __typename?: "AuthenticateResponse";
   user: User;
@@ -38,6 +42,7 @@ export type Mutation = {
   __typename?: "Mutation";
   _empty?: Maybe<Scalars["String"]>;
   activeTodo: TodoResponse;
+  authentication: AuthenticateResponse;
   createTodo: TodoResponse;
   deleteTodo: TodoResponse;
   doneTodo: TodoResponse;
@@ -48,6 +53,10 @@ export type Mutation = {
 
 export type MutationActiveTodoArgs = {
   input: TodoIdInput;
+};
+
+export type MutationAuthenticationArgs = {
+  input: AuthInput;
 };
 
 export type MutationCreateTodoArgs = {

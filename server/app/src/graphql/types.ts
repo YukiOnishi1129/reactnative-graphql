@@ -25,6 +25,10 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type AuthInput = {
+  token: Scalars["String"];
+};
+
 export type AuthenticateResponse = {
   __typename?: "AuthenticateResponse";
   user: User;
@@ -47,6 +51,7 @@ export type Mutation = {
   __typename?: "Mutation";
   _empty?: Maybe<Scalars["String"]>;
   activeTodo: TodoResponse;
+  authentication: AuthenticateResponse;
   createTodo: TodoResponse;
   deleteTodo: TodoResponse;
   doneTodo: TodoResponse;
@@ -57,6 +62,10 @@ export type Mutation = {
 
 export type MutationActiveTodoArgs = {
   input: TodoIdInput;
+};
+
+export type MutationAuthenticationArgs = {
+  input: AuthInput;
 };
 
 export type MutationCreateTodoArgs = {
@@ -265,8 +274,9 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  AuthenticateResponse: ResolverTypeWrapper<AuthenticateResponse>;
+  AuthInput: AuthInput;
   String: ResolverTypeWrapper<Scalars["String"]>;
+  AuthenticateResponse: ResolverTypeWrapper<AuthenticateResponse>;
   CreateTodoInput: CreateTodoInput;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
   LoginInput: LoginInput;
@@ -285,8 +295,9 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  AuthenticateResponse: AuthenticateResponse;
+  AuthInput: AuthInput;
   String: Scalars["String"];
+  AuthenticateResponse: AuthenticateResponse;
   CreateTodoInput: CreateTodoInput;
   DateTime: Scalars["DateTime"];
   LoginInput: LoginInput;
@@ -327,6 +338,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationActiveTodoArgs, "input">
+  >;
+  authentication?: Resolver<
+    ResolversTypes["AuthenticateResponse"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAuthenticationArgs, "input">
   >;
   createTodo?: Resolver<
     ResolversTypes["TodoResponse"],

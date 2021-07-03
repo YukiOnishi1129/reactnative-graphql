@@ -1,6 +1,6 @@
 /**
  * HomeTemplate
- * @package pages
+ * @package components
  * @copyright Yuki Onishi
  */
 import React from "react";
