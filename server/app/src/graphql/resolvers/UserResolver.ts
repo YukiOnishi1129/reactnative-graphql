@@ -103,8 +103,7 @@ export const UserResolvers: IResolvers = {
 
       // ログイン処理
       const data = await loginAuth(args.input.email, args.input.password);
-      if (!data)
-        throw new ApolloError("リクエストパラメータエラーです。", "400");
+      if (!data) throw new ApolloError("ログインエラーです。", "401");
 
       return {
         user: data.user,
@@ -142,11 +141,7 @@ export const UserResolvers: IResolvers = {
         token
       );
 
-      if (!data)
-        throw new ApolloError(
-          "システムエラー。会員登録に失敗しました。",
-          "400"
-        );
+      if (!data) throw new ApolloError("会員登録に失敗しました。", "400");
 
       return {
         user: data.user,

@@ -11,23 +11,17 @@ import { Theme } from "@/styles/Theme";
  * style
  */
 export const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    height: "70px",
-  },
-  bgColor: {
-    height: "100%",
+  footer: {
+    color: Theme.color.white,
     backgroundColor: Theme.color.deepGreen.full,
+    width: "100%",
+    height: "40px",
   },
-  titleArea: {
-    flexGrow: 1,
-    marginLeft: 60,
-  },
-  titleClickArea: {
-    width: "150px",
-    cursor: "pointer",
-  },
-  title: {
-    letterSpacing: 5,
+  copyRight: {
+    fontSize: "14px",
+    textAlign: "center",
+    margin: "0 auto",
+    padding: "10px 0",
+    width: "200px",
   },
 }));
