@@ -6,6 +6,8 @@
 import React from "react";
 import { AppProps } from "next/app";
 import Head from "next/head";
+/* providers */
+import { AppProvider } from "@/providers/AppProviders";
 /* styles */
 import "@/styles/global.scss";
 
@@ -20,7 +22,9 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Component {...pageProps} />
+      <AppProvider>
+        <Component {...pageProps} />
+      </AppProvider>
     </>
   );
 };
