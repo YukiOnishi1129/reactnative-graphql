@@ -1,14 +1,31 @@
 # reactnative-graphql
 
+reactnative と書いてるけど、web(Next.js)もあります。
+
+## Next.js リポジトリ
+
+- web リポジトリ
+
 ## ReactNative リポジトリ
 
 - native リポジトリ
 
-## server リポジトリ
+## バックエンドリポジトリ (Express)
 
 - server リポジトリ
 
 # 環境構築
+
+## Next.js 起動
+
+- web ディレクトリへ移動
+
+```
+cd web
+```
+
+- 「yarn」コマンドでライブラリを install
+- 「yarn dev」コマンドを実行
 
 ## ReactNative 起動
 
@@ -18,6 +35,7 @@
 cd native
 ```
 
+- 「yarn」コマンドでライブラリを install
 - 「yarn start」コマンドを実行
 
 ## バックエンド起動
