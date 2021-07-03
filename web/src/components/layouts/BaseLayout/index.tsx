@@ -40,7 +40,7 @@ export const BaseLayout: React.VFC<Props> = ({ children }: Props) => {
   return (
     <div>
       <Header />
-      <div>{children}</div>
+      <main className={classes.main}>{children}</main>
       <footer className={classes.footer}>
         <Footer />
       </footer>
