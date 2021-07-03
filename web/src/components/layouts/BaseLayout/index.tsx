@@ -7,8 +7,11 @@ import React from "react";
 import { useRouter } from "next/router";
 /* components */
 import { Header } from "@/components/layouts/Header";
+import { Footer } from "@/components/layouts/Footer";
 /* hooks */
 import { useAuthenticate } from "@/hooks/useAuthenticate";
+/* styles */
+import { useStyles } from "./style";
 
 /**
  * props
@@ -27,6 +30,8 @@ export const BaseLayout: React.VFC<Props> = ({ children }: Props) => {
   const router = useRouter();
   /* hooks */
   const { isCheckedAuthenticate } = useAuthenticate();
+  /* styles */
+  const classes = useStyles();
 
   React.useEffect(() => {
     isCheckedAuthenticate(router);
@@ -36,6 +41,9 @@ export const BaseLayout: React.VFC<Props> = ({ children }: Props) => {
     <div>
       <Header />
       <div>{children}</div>
+      <footer className={classes.footer}>
+        <Footer />
+      </footer>
     </div>
   );
 };
