@@ -8,7 +8,11 @@ import Link from "next/link";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+/* contexts */
+import { useAppState } from "@/contexts/AppContext";
+/* components */
+import { UnLoginNav } from "./organisms/UnLoginNav";
+import { DoneLoginNav } from "./organisms/DoneLoginNav";
 /* styles */
 import { useStyles } from "./style";
 
@@ -17,32 +21,29 @@ import { useStyles } from "./style";
  * @returns
  */
 export const Header: React.VFC = () => {
+  /* contexts */
+  const { isLogin } = useAppState();
+  /* styles */
   const classes = useStyles();
+
+  const titleLink = isLogin ? "./home" : "./";
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.bgColor}>
         <Toolbar>
+          {/* タイトル */}
           <div className={classes.titleArea}>
-            <Link href="/">
-              <Typography variant="h6" className={classes.title}>
-                Todoリスト
-              </Typography>
-            </Link>
+            <div className={classes.titleClickArea}>
+              <Link href={titleLink}>
+                <Typography variant="h6" className={classes.title}>
+                  Todoリスト
+                </Typography>
+              </Link>
+            </div>
           </div>
-
-          <div className={classes.nav}>
-            <Link href="/signin">
-              <Button color="inherit" className={classes.button}>
-                SignIn
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button color="inherit" className={classes.button}>
-                SignUp
-              </Button>
-            </Link>
-          </div>
+          {/* ナビゲーション */}
+          {isLogin ? <DoneLoginNav /> : <UnLoginNav />}
         </Toolbar>
       </AppBar>
     </div>

@@ -20,6 +20,9 @@ export const useStyles = makeStyles(() => ({
   titleArea: {
     flexGrow: 1,
     marginLeft: 60,
+  },
+  titleClickArea: {
+    width: "150px",
     cursor: "pointer",
   },
   title: {
