@@ -26,6 +26,12 @@ export const useStyles = makeStyles(() => ({
       paddingBottom: "10px",
     },
   },
+  error: {
+    textAlign: "center",
+    color: "red",
+    marginBottom: "20px",
+    fontWeight: "bold",
+  },
   form: {
     padding: "40px 60px",
   },
@@ -37,7 +43,9 @@ export const useStyles = makeStyles(() => ({
     },
   },
   button: {
-    margin: "0 auto",
+    marginBottom: "50px",
+    marginRight: "auto",
+    marginLeft: "auto",
     width: "40%",
   },
 }));

@@ -40,14 +40,17 @@ export const InputForm: React.VFC<Props> = (props: Props) => {
   const classes = useStyles();
 
   if (errorFlg) {
-    <TextField
-      error
-      label={label}
-      value={value}
-      placeholder={placeholder}
-      helperText={errorMessage}
-      onChange={onChange}
-    />;
+    return (
+      <TextField
+        className={classes.input}
+        error
+        label={label}
+        value={value}
+        placeholder={placeholder}
+        helperText={errorMessage}
+        onChange={onChange}
+      />
+    );
   }
 
   return (
