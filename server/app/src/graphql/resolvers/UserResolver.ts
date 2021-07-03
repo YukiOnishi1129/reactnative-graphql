@@ -141,11 +141,7 @@ export const UserResolvers: IResolvers = {
         token
       );
 
-      if (!data)
-        throw new ApolloError(
-          "システムエラー。会員登録に失敗しました。",
-          "400"
-        );
+      if (!data) throw new ApolloError("会員登録に失敗しました。", "400");
 
       return {
         user: data.user,

@@ -10,6 +10,7 @@ import { useAppDispatch, login, logout } from "@/contexts/AppContext";
 /* hooks */
 import {
   useSignInMutation,
+  useSignUpMutation,
   useAuthenticationMutation,
 } from "@/hooks/useGraphQL";
 /* logics */
@@ -26,6 +27,7 @@ export const useAuthenticate = () => {
   const dispatch = useAppDispatch();
   /* graphql mutation */
   const [sigInInMutation] = useSignInMutation();
+  const [sigInUpMutation] = useSignUpMutation();
   const [authenticationMutation] = useAuthenticationMutation();
 
   /**
@@ -58,6 +60,39 @@ export const useAuthenticate = () => {
       }
     },
     [dispatch, router, sigInInMutation]
+  );
+
+  /**
+   * signUp
+   */
+  const signUp = React.useCallback(
+    async (name: string, email: string, password: string) => {
+      try {
+        const result = await sigInUpMutation({
+          variables: {
+            registerInput: {
+              name: name,
+              email: email,
+              password: password,
+            },
+          },
+        });
+        if (!result?.data) return;
+        // localStorageにtokenを保存
+        localStorage.setItem("authorization", result.data.register.token);
+        // globalStateを更新
+        dispatch(
+          login(result.data.register.user.id, result.data.register.token)
+        );
+        // Home画面(認証済みの画面)へリダイレクト
+        router.push({
+          pathname: NAVIGATION_LINK.HOME,
+        });
+      } catch (error) {
+        return error.message;
+      }
+    },
+    [router, dispatch, sigInUpMutation]
   );
 
   /**
@@ -136,6 +171,7 @@ export const useAuthenticate = () => {
 
   return {
     signIn,
+    signUp,
     signOut,
     isCheckedAuthenticate,
   };
