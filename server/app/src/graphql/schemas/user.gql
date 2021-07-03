@@ -17,9 +17,14 @@ input RegisterInput {
   password: String!
 }
 
+input AuthInput {
+  token: String!
+}
+
 extend type Mutation {
   login(input: LoginInput!): AuthenticateResponse!
   register(input: RegisterInput!): AuthenticateResponse!
+  authentication(input: AuthInput!): AuthenticateResponse!
 }
 
 """

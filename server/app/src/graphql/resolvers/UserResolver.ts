@@ -14,6 +14,7 @@ import {
   loginAuth,
   registerUser,
   isSameEmailUser,
+  authTokenUser,
 } from "@Services/User";
 /* types */
 import { ResolverContextType } from "@Types/Resolver";
@@ -150,6 +151,20 @@ export const UserResolvers: IResolvers = {
       return {
         user: data.user,
         token: data.token,
+      };
+    },
+
+    async authentication(parent, args) {
+      if (!args?.input?.token)
+        throw new ApolloError("リクエストパラメータエラーです。", "400");
+
+      const user = await authTokenUser(args.input.token);
+
+      if (!user) throw new ApolloError("認証エラー。", "401");
+
+      return {
+        user: user,
+        token: args.input.token,
       };
     },
   },
