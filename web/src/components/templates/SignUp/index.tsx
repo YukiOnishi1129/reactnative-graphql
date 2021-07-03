@@ -116,7 +116,7 @@ export const SignUpTemplate: React.VFC = () => {
 
     // 最大文字数チェック
     if (!errMsgName || !errMsgEmail) {
-      errMsgName = MaxLengthValidation(inputName, 255);
+      errMsgName = MaxLengthValidation(inputName, 20);
       errMsgEmail = MaxLengthValidation(inputEmail, 255);
     }
 
