@@ -355,6 +355,60 @@ export type SignUpMutationOptions = Apollo.BaseMutationOptions<
   Types.SignUpMutation,
   Types.SignUpMutationVariables
 >;
+export const AuthenticationDocument = gql`
+  mutation Authentication($authInput: AuthInput!) {
+    authentication(input: $authInput) {
+      user {
+        ...GetUser
+      }
+      token
+    }
+  }
+  ${GetUserFragmentDoc}
+`;
+export type AuthenticationMutationFn = Apollo.MutationFunction<
+  Types.AuthenticationMutation,
+  Types.AuthenticationMutationVariables
+>;
+
+/**
+ * __useAuthenticationMutation__
+ *
+ * To run a mutation, you first call `useAuthenticationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAuthenticationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [authenticationMutation, { data, loading, error }] = useAuthenticationMutation({
+ *   variables: {
+ *      authInput: // value for 'authInput'
+ *   },
+ * });
+ */
+export function useAuthenticationMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.AuthenticationMutation,
+    Types.AuthenticationMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.AuthenticationMutation,
+    Types.AuthenticationMutationVariables
+  >(AuthenticationDocument, options);
+}
+export type AuthenticationMutationHookResult = ReturnType<
+  typeof useAuthenticationMutation
+>;
+export type AuthenticationMutationResult =
+  Apollo.MutationResult<Types.AuthenticationMutation>;
+export type AuthenticationMutationOptions = Apollo.BaseMutationOptions<
+  Types.AuthenticationMutation,
+  Types.AuthenticationMutationVariables
+>;
 export const CreateTodoDocument = gql`
   mutation CreateTodo($createTodoInput: CreateTodoInput!) {
     createTodo(input: $createTodoInput) {

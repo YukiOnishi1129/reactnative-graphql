@@ -61,6 +61,15 @@ mutation SignUp($registerInput: RegisterInput!) {
   }
 }
 
+mutation Authentication($authInput: AuthInput!) {
+  authentication(input: $authInput) {
+    user {
+      ...GetUser
+    }
+    token
+  }
+}
+
 mutation CreateTodo($createTodoInput: CreateTodoInput!) {
   createTodo(input: $createTodoInput) {
     todo {
