@@ -13,6 +13,8 @@ import { useAppState } from "@/contexts/AppContext";
 /* components */
 import { UnLoginNav } from "./organisms/UnLoginNav";
 import { DoneLoginNav } from "./organisms/DoneLoginNav";
+/* constants */
+import { NAVIGATION_LINK } from "@/constants/navigation";
 /* styles */
 import { useStyles } from "./style";
 
@@ -26,7 +28,7 @@ export const Header: React.VFC = () => {
   /* styles */
   const classes = useStyles();
 
-  const titleLink = isLogin ? "./home" : "./";
+  const titleLink = isLogin ? NAVIGATION_LINK.HOME : NAVIGATION_LINK.TOP;
 
   return (
     <div className={classes.root}>

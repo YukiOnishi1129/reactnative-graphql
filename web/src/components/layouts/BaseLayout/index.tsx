@@ -1,5 +1,5 @@
 /**
- * UnAuthLayout
+ * BaseLayout
  * @package components
  * @copyright Yuki Onishi
  */
@@ -15,11 +15,11 @@ type Props = {
 };
 
 /**
- * UnAuthLayout
+ * BaseLayout
  * @param {Props} props
  * @returns
  */
-export const UnAuthLayout: React.VFC<Props> = ({ children }: Props) => {
+export const BaseLayout: React.VFC<Props> = ({ children }: Props) => {
   return (
     <div>
       <Header />

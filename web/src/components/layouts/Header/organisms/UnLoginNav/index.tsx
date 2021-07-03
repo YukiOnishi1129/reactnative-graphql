@@ -6,6 +6,8 @@
 import React from "react";
 import Link from "next/link";
 import Button from "@material-ui/core/Button";
+/* constants */
+import { NAVIGATION_LINK } from "@/constants/navigation";
 /* styles */
 import { useStyles } from "./style";
 
@@ -18,12 +20,12 @@ export const UnLoginNav: React.VFC = () => {
 
   return (
     <div className={classes.nav}>
-      <Link href="/signin">
+      <Link href={NAVIGATION_LINK.SIGN_IN}>
         <Button color="inherit" className={classes.button}>
           SignIn
         </Button>
       </Link>
-      <Link href="/signup">
+      <Link href={NAVIGATION_LINK.SIGN_UP}>
         <Button color="inherit" className={classes.button}>
           SignUp
         </Button>

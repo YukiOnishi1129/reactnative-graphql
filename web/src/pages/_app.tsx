@@ -9,7 +9,7 @@ import Head from "next/head";
 /* providers */
 import { AppProvider } from "@/providers/AppProviders";
 /* components */
-import { UnAuthLayout } from "@/components/layouts/UnAuthLayout";
+import { BaseLayout } from "@/components/layouts/BaseLayout";
 /* styles */
 import "@/styles/global.scss";
 
@@ -25,9 +25,9 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <AppProvider>
-        <UnAuthLayout>
+        <BaseLayout>
           <Component {...pageProps} />
-        </UnAuthLayout>
+        </BaseLayout>
       </AppProvider>
     </>
   );
