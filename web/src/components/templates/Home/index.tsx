@@ -6,7 +6,7 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 /* components */
-import { AddTodo } from "./organisms/AddTodo";
+import { AddTodo } from "../../common/molecules/AddTodo";
 import { TodoList } from "./organisms/TodoList";
 /* hooks */
 import {
