@@ -5,7 +5,6 @@
  */
 import React from "react";
 /* components */
-import { Todo } from "@/components/common/molecules/Todo";
 import { ActiveTodo } from "@/components/common/molecules/ActiveTodo";
 import { DoneTodo } from "@/components/common/molecules/DoneTodo";
 import { Pagination } from "@/components/common/molecules/Pagination";

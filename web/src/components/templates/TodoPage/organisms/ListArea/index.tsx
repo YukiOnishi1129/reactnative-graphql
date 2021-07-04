@@ -6,7 +6,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 /* components */
-import { Todo } from "@/components/common/molecules/Todo";
+import { ActiveTodo } from "@/components/common/molecules/ActiveTodo";
+import { DoneTodo } from "@/components/common/molecules/DoneTodo";
 import { Pagination } from "@/components/common/molecules/Pagination";
 /* constants */
 import { TODO_SHOW_COUNT } from "@/constants/config";
@@ -20,6 +21,8 @@ import { useStyles } from "./style";
  */
 type Props = {
   allTodo: Query["allTodo"];
+  onActionTodo: (targetId: number, doneFlg: boolean) => Promise<void>;
+  onDeleteTodo: (targetId: number) => Promise<void>;
 };
 
 /**
@@ -31,7 +34,7 @@ export const ListArea: React.VFC<Props> = (props: Props) => {
   /* router */
   const { query } = useRouter();
   /* props */
-  const { allTodo } = props;
+  const { allTodo, onActionTodo, onDeleteTodo } = props;
   /* styles */
   const classes = useStyles();
 
@@ -58,11 +61,27 @@ export const ListArea: React.VFC<Props> = (props: Props) => {
     <div>
       <div className={classes.container}>
         {todoList.map((todo) => {
-          return (
-            <div className={classes.list} key={todo.id}>
-              <Todo todo={todo} />
-            </div>
-          );
+          if (todo.doneFlg) {
+            return (
+              <div className={classes.list} key={todo.id}>
+                <DoneTodo
+                  todo={todo}
+                  onActionTodo={onActionTodo}
+                  onDeleteTodo={onDeleteTodo}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <div className={classes.list} key={todo.id}>
+                <ActiveTodo
+                  todo={todo}
+                  onActionTodo={onActionTodo}
+                  onDeleteTodo={onDeleteTodo}
+                />
+              </div>
+            );
+          }
         })}
       </div>
 
