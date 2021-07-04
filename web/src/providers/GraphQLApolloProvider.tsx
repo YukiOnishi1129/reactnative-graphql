@@ -41,7 +41,8 @@ export const GraphQLApolloProvider: React.VFC<Props> = ({
   React.useEffect(() => {
     const appClient = createApolloClient();
     setClient(appClient);
-  }, [createApolloClient]);
+    // 「isLogin」を依存関係にすることで、　毎回Apollo Clientインスタンスを初期化する
+  }, [createApolloClient, state.isLogin]);
 
   if (!client) return <CircularProgress />;
 

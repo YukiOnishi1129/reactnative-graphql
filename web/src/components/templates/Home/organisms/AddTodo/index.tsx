@@ -20,7 +20,7 @@ import { EventType } from "@/types/event";
 import { useStyles } from "./style";
 
 /**
- *
+ * AddTodo
  * @returns
  */
 export const AddTodo: React.VFC = () => {

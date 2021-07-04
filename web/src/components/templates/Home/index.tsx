@@ -7,6 +7,7 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 /* components */
 import { AddTodo } from "./organisms/AddTodo";
+import { TodoList } from "./organisms/TodoList";
 /* hooks */
 import {
   useCreateTodoMutation,
@@ -38,7 +39,9 @@ export const HomeTemplate: React.VFC = () => {
         <div className={classes.leftBar}>
           <AddTodo />
         </div>
-        <div className={classes.rightBar}></div>
+        <div className={classes.rightBar}>
+          <TodoList />
+        </div>
       </Box>
     </div>
   );
