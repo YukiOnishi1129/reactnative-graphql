@@ -4,6 +4,8 @@
  * @copyright Yuki Onishi
  */
 import React from "react";
+/* components */
+import { ListArea } from "@/components/templates/Home/organisms/ListArea";
 /* hooks */
 import {
   useGetAllTodoQuery,
@@ -38,16 +40,7 @@ export const TodoList: React.VFC = () => {
       {getAllTodoQuery?.error && <p>エラー</p>}
       {getAllTodoQuery?.data?.allTodo &&
         getAllTodoQuery.data.allTodo.length !== 0 && (
-          <div>
-            {getAllTodoQuery.data.allTodo.map((todo) => {
-              return (
-                <div key={todo.id}>
-                  <p>{todo.title}</p>
-                  <p>{todo.content}</p>
-                </div>
-              );
-            })}
-          </div>
+          <ListArea allTodo={getAllTodoQuery.data.allTodo} />
         )}
     </div>
   );
