@@ -35,7 +35,7 @@ export const useStyles = makeStyles(() => ({
   },
   rightBar: {
     width: "50%",
-    border: "2px solid #aaa",
+    // border: "2px solid #aaa",
     minHeight: "400px",
   },
 }));

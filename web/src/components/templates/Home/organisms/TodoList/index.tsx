@@ -35,7 +35,7 @@ export const TodoList: React.VFC = () => {
   const [deleteTodoMutation] = useDeleteTodoMutation();
 
   return (
-    <div>
+    <div className={classes.container}>
       {getAllTodoQuery?.loading && <p>Loading...</p>}
       {getAllTodoQuery?.error && <p>エラー</p>}
       {getAllTodoQuery?.data?.allTodo &&

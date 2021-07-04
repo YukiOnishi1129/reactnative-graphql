@@ -14,7 +14,7 @@ export const useStyles = makeStyles(() => ({
     // marginRight: "auto",
     // marginLeft: "auto",
     marginBottom: "20px",
-    border: "2px solid #aaa",
+    border: "1px solid #aaa",
     borderRadius: "10px",
     minHeight: "500px",
 

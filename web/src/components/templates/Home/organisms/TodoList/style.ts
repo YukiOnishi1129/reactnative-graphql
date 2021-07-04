@@ -8,4 +8,9 @@ import { makeStyles } from "@material-ui/core/styles";
 /**
  * style
  */
-export const useStyles = makeStyles(() => ({}));
+export const useStyles = makeStyles(() => ({
+  container: {
+    border: "1px solid #aaa",
+    borderRadius: "20px",
+  },
+}));
