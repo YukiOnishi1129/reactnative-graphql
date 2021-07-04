@@ -7,7 +7,7 @@
 import React from "react";
 /* components */
 import { BaseLayout } from "@/components/layouts/BaseLayout";
-import { HomeTemplate } from "@/components/templates/Home/index";
+import { TodoPageTemplate } from "@/components/templates/TodoPage";
 
 /**
  * TodoPage
@@ -15,7 +15,7 @@ import { HomeTemplate } from "@/components/templates/Home/index";
  */
 const TodoPage = () => (
   <BaseLayout>
-    <HomeTemplate />
+    <TodoPageTemplate />
   </BaseLayout>
 );
 
