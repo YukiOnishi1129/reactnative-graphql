@@ -17,9 +17,10 @@ type Props = {
   label: string;
   value: string;
   placeholder?: string;
-  errorMessage: string;
-  errorFlg: boolean;
-  onChange: EventType["onChange"];
+  errorMessage?: string;
+  errorFlg?: boolean;
+  disabled?: boolean;
+  onChange?: EventType["onChange"];
 };
 
 /**
@@ -34,10 +35,22 @@ export const InputForm: React.VFC<Props> = (props: Props) => {
     placeholder = "",
     errorMessage,
     errorFlg,
+    disabled,
     onChange,
   } = props;
   /* styles */
   const classes = useStyles();
+
+  if (disabled) {
+    return (
+      <TextField
+        className={classes.input}
+        disabled
+        label={label}
+        value={value}
+      />
+    );
+  }
 
   if (errorFlg) {
     return (

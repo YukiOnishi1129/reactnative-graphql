@@ -3,6 +3,7 @@
  * @package components
  */
 import React from 'react';
+import { useApolloClient } from '@apollo/client';
 import { StyleSheet, View, Text } from 'react-native';
 /* storages */
 import { getUserStorage } from '@Storage/Storage';
@@ -20,6 +21,8 @@ import { useGetMyUserQuery } from '@Hook/useGraphQL';
  * @returns
  */
 export const MyPageTemplate: React.VFC = () => {
+  /* cache */
+  const client = useApolloClient();
   /* contexts */
   const dispatch = useAppDispatch();
   /* storage */
@@ -33,6 +36,7 @@ export const MyPageTemplate: React.VFC = () => {
   const onLogout = async () => {
     await repo.remove();
     dispatch(logout());
+    // client.clearStore();
   };
 
   return (

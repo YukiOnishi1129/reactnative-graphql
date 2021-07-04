@@ -1,5 +1,5 @@
 /**
- * HomeTemplate
+ * TodoPageTemplate
  * @package components
  * @copyright Yuki Onishi
  */
@@ -24,7 +24,7 @@ import { useStyles } from "./style";
  * HomeTemplate
  * @returns
  */
-export const HomeTemplate: React.VFC = () => {
+export const TodoPageTemplate: React.VFC = () => {
   /* styles */
   const classes = useStyles();
 

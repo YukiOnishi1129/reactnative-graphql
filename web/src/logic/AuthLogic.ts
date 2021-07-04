@@ -12,5 +12,5 @@ import { UN_AUTH_NAVIGATION_LINK_ARRAY } from "@/constants/navigation";
  * @returns
  */
 export const isStayDoneAuthPageFunc = (routerParam: string) => {
-  return UN_AUTH_NAVIGATION_LINK_ARRAY.indexOf("." + routerParam) === -1;
+  return UN_AUTH_NAVIGATION_LINK_ARRAY.indexOf(routerParam) === -1;
 };

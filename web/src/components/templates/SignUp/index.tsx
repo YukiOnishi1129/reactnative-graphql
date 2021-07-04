@@ -108,6 +108,7 @@ export const SignUpTemplate: React.VFC = () => {
     let errMsgEmail = "";
     let errMsgPassword = "";
     let errMsgConfirmPassword = "";
+
     // 必須チェック
     errMsgName = RequiredValidation(inputName);
     errMsgEmail = RequiredValidation(inputEmail);
@@ -115,10 +116,8 @@ export const SignUpTemplate: React.VFC = () => {
     errMsgConfirmPassword = RequiredValidation(inputConfirmPassword);
 
     // 最大文字数チェック
-    if (!errMsgName || !errMsgEmail) {
-      errMsgName = MaxLengthValidation(inputName, 20);
-      errMsgEmail = MaxLengthValidation(inputEmail, 255);
-    }
+    if (!errMsgName) errMsgName = MaxLengthValidation(inputName, 20);
+    if (!errMsgEmail) errMsgEmail = MaxLengthValidation(inputEmail, 255);
 
     // Email形式チェック
     if (!errMsgEmail) {
@@ -126,20 +125,19 @@ export const SignUpTemplate: React.VFC = () => {
     }
 
     // 最小文字数チェック
-    if (!errMsgPassword || !errMsgConfirmPassword) {
+    if (!errMsgPassword)
       errMsgPassword = ValueLengthValidation(inputPassword, 8, 20);
+    if (!errMsgConfirmPassword)
       errMsgConfirmPassword = ValueLengthValidation(
         inputConfirmPassword,
         8,
         20
       );
-    }
 
     // 英数字チェック
-    if (!errMsgPassword || !errMsgConfirmPassword) {
-      errMsgPassword = AlphanumericValidation(inputPassword);
+    if (!errMsgPassword) errMsgPassword = AlphanumericValidation(inputPassword);
+    if (!errMsgConfirmPassword)
       errMsgConfirmPassword = AlphanumericValidation(inputConfirmPassword);
-    }
 
     // パスワード一致チェック
     if (!errMsgPassword || !errMsgConfirmPassword) {

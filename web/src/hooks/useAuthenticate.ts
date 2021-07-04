@@ -22,6 +22,7 @@ import { NAVIGATION_LINK } from "@/constants/navigation";
  * useAuthenticate
  */
 export const useAuthenticate = () => {
+  /* router */
   const router = useRouter();
   /* contexts */
   const dispatch = useAppDispatch();
@@ -102,7 +103,7 @@ export const useAuthenticate = () => {
     // ログアウト処理
     localStorage.removeItem("authorization");
     dispatch(logout());
-    // ログイン画面(認証済みの画面)へリダイレクト
+    // ログイン画面へリダイレクト
     router.push({
       pathname: NAVIGATION_LINK.SIGN_IN,
     });
