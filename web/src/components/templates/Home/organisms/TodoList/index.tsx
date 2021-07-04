@@ -13,8 +13,7 @@ import {
   useActiveTodoMutation,
   useDeleteTodoMutation,
 } from "@/hooks/useGraphQL";
-/* types */
-import { EventType } from "@/types/event";
+import { useCustomSubscription } from "@/hooks/useCustomSubscription";
 /* styles */
 import { useStyles } from "./style";
 
@@ -33,6 +32,28 @@ export const TodoList: React.VFC = () => {
   const [doneTodoMutation] = useDoneTodoMutation();
   const [activeTodoMutation] = useActiveTodoMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
+  /* graphql subscription */
+  const {
+    getTodoSubscription,
+    getUpdatedTodoSubscription,
+    getDoneTodoSubscription,
+    getActiveTodoSubscription,
+    getDeleteTodoSubscription,
+  } = useCustomSubscription();
+
+  React.useEffect(() => {
+    getTodoSubscription;
+    getUpdatedTodoSubscription;
+    getDoneTodoSubscription;
+    getActiveTodoSubscription;
+    getDeleteTodoSubscription;
+  }, [
+    getTodoSubscription,
+    getUpdatedTodoSubscription,
+    getDoneTodoSubscription,
+    getActiveTodoSubscription,
+    getDeleteTodoSubscription,
+  ]);
 
   /**
    * Todo完了
