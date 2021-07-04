@@ -4,6 +4,7 @@
  * @copyright Yuki Onishi
  */
 import React from "react";
+import Link from "next/link";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 /* types */
@@ -16,6 +17,8 @@ import { useStyles } from "./style";
  */
 type Props = {
   todo: Query["todo"];
+  onActionTodo: (targetId: number, doneFlg: boolean) => Promise<void>;
+  onDeleteTodo: (targetId: number) => Promise<void>;
 };
 
 /**
@@ -25,7 +28,7 @@ type Props = {
  */
 export const Todo: React.VFC<Props> = (props: Props) => {
   /* props */
-  const { todo } = props;
+  const { todo, onActionTodo, onDeleteTodo } = props;
   /* styles */
   const classes = useStyles();
 
@@ -34,9 +37,11 @@ export const Todo: React.VFC<Props> = (props: Props) => {
       <h6 className={classes.title}>{todo.title}</h6>
       <div className={classes.iconArea}>
         <div className={classes.icon}>
-          <EditIcon fontSize="large" />
+          <Link href={`/todo-detail/${todo.id}`}>
+            <EditIcon fontSize="large" />
+          </Link>
         </div>
-        <div className={classes.icon}>
+        <div className={classes.icon} onClick={() => onDeleteTodo(todo.id)}>
           <DeleteIcon fontSize="large" />
         </div>
       </div>

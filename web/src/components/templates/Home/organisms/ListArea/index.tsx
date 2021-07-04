@@ -17,6 +17,8 @@ import { useStyles } from "./style";
  */
 type Props = {
   allTodo: Query["allTodo"];
+  onActionTodo: (targetId: number, doneFlg: boolean) => Promise<void>;
+  onDeleteTodo: (targetId: number) => Promise<void>;
 };
 
 /**
@@ -26,7 +28,7 @@ type Props = {
  */
 export const ListArea: React.VFC<Props> = (props: Props) => {
   /* props */
-  const { allTodo } = props;
+  const { allTodo, onActionTodo, onDeleteTodo } = props;
   /* styles */
   const classes = useStyles();
 
@@ -44,7 +46,11 @@ export const ListArea: React.VFC<Props> = (props: Props) => {
         {todoList.map((todo) => {
           return (
             <div className={classes.list} key={todo.id}>
-              <Todo todo={todo} />
+              <Todo
+                todo={todo}
+                onActionTodo={onActionTodo}
+                onDeleteTodo={onDeleteTodo}
+              />
             </div>
           );
         })}
