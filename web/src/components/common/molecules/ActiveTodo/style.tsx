@@ -21,10 +21,14 @@ export const useStyles = makeStyles(() => ({
     height: "70px",
   },
   title: {
+    overflow: "hidden",
     width: "40%",
+    maxWidth: "142px",
     height: "100%",
     lineHeight: "60px",
     fontSize: "24px",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
   iconArea: {
     width: "30%",
