@@ -1,5 +1,5 @@
 /**
- * Todo
+ * DoneTodo
  * @package components
  * @copyright Yuki Onishi
  */
@@ -24,11 +24,11 @@ type Props = {
 };
 
 /**
- * Todo
+ * DoneTodo
  * @param {Props} props
  * @returns
  */
-export const Todo: React.VFC<Props> = (props: Props) => {
+export const DoneTodo: React.VFC<Props> = (props: Props) => {
   /* props */
   const { todo, onActionTodo, onDeleteTodo } = props;
   /* styles */
@@ -47,7 +47,11 @@ export const Todo: React.VFC<Props> = (props: Props) => {
 
   return (
     <div key={todo.id} className={classes.todo}>
-      <Checkbox checked={checked} onChange={handleCheckChange} />
+      <Checkbox
+        checked={checked}
+        onChange={handleCheckChange}
+        color="default"
+      />
       <h6 className={classes.title}>{todo.title}</h6>
       <div className={classes.iconArea}>
         <div className={classes.icon}>

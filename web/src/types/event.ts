@@ -14,6 +14,7 @@ export interface EventType {
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  onChangeEvent: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeSelect: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   onkeypress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;

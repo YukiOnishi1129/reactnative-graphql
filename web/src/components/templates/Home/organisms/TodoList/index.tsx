@@ -99,8 +99,8 @@ export const TodoList: React.VFC = () => {
 
   return (
     <div className={classes.container}>
-      {getAllTodoQuery?.loading && <p>Loading...</p>}
-      {getAllTodoQuery?.error && <p>エラー</p>}
+      {/* {getAllTodoQuery?.loading && <p>Loading...</p>}
+      {getAllTodoQuery?.error && <p>エラー</p>} */}
       {getAllTodoQuery?.data?.allTodo &&
         getAllTodoQuery.data.allTodo.length !== 0 && (
           <ListArea

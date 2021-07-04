@@ -6,6 +6,8 @@
 import React from "react";
 /* components */
 import { Todo } from "@/components/common/molecules/Todo";
+import { ActiveTodo } from "@/components/common/molecules/ActiveTodo";
+import { DoneTodo } from "@/components/common/molecules/DoneTodo";
 import { Pagination } from "@/components/common/molecules/Pagination";
 /* types */
 import { Query } from "@/types/schemas";
@@ -44,15 +46,27 @@ export const ListArea: React.VFC<Props> = (props: Props) => {
     <div>
       <div className={classes.container}>
         {todoList.map((todo) => {
-          return (
-            <div className={classes.list} key={todo.id}>
-              <Todo
-                todo={todo}
-                onActionTodo={onActionTodo}
-                onDeleteTodo={onDeleteTodo}
-              />
-            </div>
-          );
+          if (todo.doneFlg) {
+            return (
+              <div className={classes.list} key={todo.id}>
+                <DoneTodo
+                  todo={todo}
+                  onActionTodo={onActionTodo}
+                  onDeleteTodo={onDeleteTodo}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <div className={classes.list} key={todo.id}>
+                <ActiveTodo
+                  todo={todo}
+                  onActionTodo={onActionTodo}
+                  onDeleteTodo={onDeleteTodo}
+                />
+              </div>
+            );
+          }
         })}
       </div>
 
